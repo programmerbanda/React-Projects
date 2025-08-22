@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./index.css";
-
+import Header from "./components/Header";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -27,14 +27,15 @@ function App() {
 
   return (
     <div className="bg-[#242424] min-h-screen flex flex-col items-center justify-center text-white">
-      <div className="w-80 bg-[#818181] py-8 px-4 rounded-md">
+      <div className="w-80 bg-[#919191] py-8 px-4 rounded-md">
+        <Header/>
         {/* Input + Add Button */}
         <div className="flex gap-2 mb-4">
           <input
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             placeholder="Enter task"
-            className="flex-1 px-3 py-2 rounded-lg text-black border border-gray-400"
+            className="flex-1 px-3 py-2 rounded-lg text-white border border-gray-400"
           />
           <button
             onClick={addTask}
