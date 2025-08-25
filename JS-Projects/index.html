@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Users</title>
+    <style>
+        body {
+            background-color: #515151;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            background-color: #919191;
+            max-width: 400px;
+            /* display: inline-block; */
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        .user-images {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        #click-here {
+            padding: 14px 32px;
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+        }
+
+        #click-here:active {
+            scale: 0.98;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <img id="userImage" class="user-images"
+                src="https://cdn.pixabay.com/photo/2022/08/22/11/04/skate-7403432_1280.jpg" alt="user-Images">
+        </div>
+        <div>
+            <p id="userName">Name : ?</p>
+            <p id="userAge">Age : ?</p>
+            <p id="userGender">Gender : ?</p>
+        </div>
+    </div>
+    <button id="click-here">
+        Click Here
+    </button>
+    <script>
+        const userImage = document.getElementById('userImage');
+        const userName = document.getElementById('userName');
+        const userAge = document.getElementById('userAge');
+        const userGender = document.getElementById('userGender');
+        const submitButton = document.getElementById('click-here');
+
+        async function getData() {
+            try {
+                const getData = await fetch('https://api.freeapi.app/api/v1/public/randomusers')
+                if (!getData.ok) throw new Error(`Something Went Wrong`);
+                const data = await getData.json()
+                const users = data.data.data
+                console.log(users)
+
+                const randomUsers = Math.floor(Math.random() * users.length);
+                const user = users[randomUsers]
+
+                userImage.src = user.picture.large
+                userName.textContent = `Name :${user.name.first}`
+                userAge.textContent = `Age :${user.dob.age}`
+                userGender.textContent = `Gender :${user.gender}`
+
+            } catch (error) {
+                console.error(`${error} Again this is error`)
+            }
+        }
+
+        submitButton.addEventListener('click', () => {
+            console.log('Please enter a valid name')
+            getData()
+
+        })
+    </script>
+</body>
+
+</html>
