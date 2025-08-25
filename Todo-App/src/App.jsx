@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="bg-[#242424] min-h-screen flex flex-col items-center justify-center text-white">
       <div className="w-80 bg-[#919191] py-8 px-4 rounded-md">
-        <Header/>
+        <Header />
         {/* Input + Add Button */}
         <div className="flex gap-2 mb-4">
           <input
@@ -96,5 +96,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
